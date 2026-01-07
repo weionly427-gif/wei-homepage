@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>我的个人首页 - 浪漫雪花</title>
     <style>
-        /* 1. 设置黑色背景面板 */
         body {
             margin: 0;
             overflow: hidden;
@@ -16,16 +15,15 @@
             font-family: 'Arial', sans-serif;
         }
 
-        /* 2. 浅粉色呼吸闪烁文字 */
+        /* 浅粉色呼吸闪烁文字 */
         .glowing-text {
             font-size: 3rem;
             font-weight: bold;
-            color: #FFB6C1; /* 浅粉色 */
+            color: #FFB6C1;
             text-align: center;
             z-index: 10;
             animation: breathe 3s infinite ease-in-out;
-            text-shadow: 0 0 20px rgba(190, 8, 36, 0.8);
-            cursor: pointer;
+            text-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
         }
 
         @keyframes breathe {
@@ -33,23 +31,62 @@
             50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 40px rgba(255, 105, 180, 0.9); }
         }
 
-        /* 3. 雪花画布 */
         canvas {
             position: absolute;
             top: 0;
             left: 0;
         }
+
+        /* 独立猫猫入口按钮 */
+        .cat-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 150px; /* 调整为你喜欢的大小 */
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        /* 猫猫图片 */
+        .cat-img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px; /* 让边缘稍微圆润 */
+        }
+
+        /* 覆盖在猫猫身上的白色萌字体 */
+        .enter-label {
+            position: absolute;
+            top: 65%; /* 放在猫猫肚子位置 */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: "STHeiti", "Microsoft YaHei", sans-serif; /* 萌系中文字体 */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            pointer-events: none; /* 防止挡住点击 */
+            white-space: nowrap;
+        }
+
+        .cat-btn:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
     </style>
 </head>
 <body>
-
     <canvas id="snowCanvas"></canvas>
-    <div class="glowing-text">欢迎来到维维宝贝的心情册</div>
+    <div class="glowing-text">你好，我的第一个动态代码！</div>
+
+    <div class="cat-btn" onclick="window.location.href='mood.html'">
+        <img src="https://file.notion.so/f/f/09794692-74d1-4d32-9844-486665780d64/392e973e-0010-4497-8c3f-ca21d898565b/image_b23629.jpg?table=block&id=17409f9f-9f9f-801a-8280-d6676f6f6f6f&spaceId=09794692-74d1-4d32-9844-486665780d64&expirationTimestamp=1736236800000&signature=Y-mB-U9Y-mB-U9Y-mB-U9Y-mB-U9Y-mB-U9Y-mB-U9Y" class="cat-img">
+        <span class="enter-label">进入</span>
+    </div>
 
     <script>
         const canvas = document.getElementById('snowCanvas');
         const ctx = canvas.getContext('2d');
-
         let width, height, snowflakes = [];
 
         function init() {
@@ -61,7 +98,7 @@
                     x: Math.random() * width,
                     y: Math.random() * height,
                     r: Math.random() * 3 + 1,
-                    d: Math.random() * 1 // 下落速度
+                    d: Math.random() * 1
                 });
             }
         }
