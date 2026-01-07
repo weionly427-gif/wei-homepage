@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>我的个人首页 - 浪漫雪花</title>
+    <style>
+        /* 1. 设置黑色背景面板 */
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* 2. 浅粉色呼吸闪烁文字 */
+        .glowing-text {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #FFB6C1; /* 浅粉色 */
+            text-align: center;
+            z-index: 10;
+            animation: breathe 3s infinite ease-in-out;
+            text-shadow: 0 0 20px rgba(190, 8, 36, 0.8);
+            cursor: pointer;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 40px rgba(255, 105, 180, 0.9); }
+        }
+
+        /* 3. 雪花画布 */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="snowCanvas"></canvas>
+    <div class="glowing-text">欢迎来到维维宝贝的心情册</div>
+
+    <script>
+        const canvas = document.getElementById('snowCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height, snowflakes = [];
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            snowflakes = [];
+            for (let i = 0; i < 150; i++) {
+                snowflakes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    r: Math.random() * 3 + 1,
+                    d: Math.random() * 1 // 下落速度
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            for (let i = 0; i < snowflakes.length; i++) {
+                let p = snowflakes[i];
+                ctx.moveTo(p.x, p.y);
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+            }
+            ctx.fill();
+            update();
+        }
+
+        function update() {
+            for (let i = 0; i < snowflakes.length; i++) {
+                let p = snowflakes[i];
+                p.y += Math.cos(p.d) + 1 + p.r / 2;
+                if (p.y > height) {
+                    snowflakes[i] = {x: Math.random() * width, y: -10, r: p.r, d: p.d};
+                }
+            }
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        setInterval(draw, 30);
+    </script>
+</body>
+</html>
