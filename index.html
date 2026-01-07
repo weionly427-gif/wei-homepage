@@ -42,7 +42,7 @@
             position: fixed;
             right: 30px;
             bottom: 30px;
-            width: 150px; /* 如果图片太大可以调小这个值 */
+            width: 150px; 
             cursor: pointer;
             z-index: 100;
             transition: transform 0.3s ease;
@@ -51,7 +51,6 @@
             align-items: center;
         }
 
-        /* 猫猫图片样式 */
         .cat-img {
             width: 100%;
             height: auto;
@@ -59,22 +58,29 @@
             filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.2));
         }
 
-        /* 附着在图片上的白色萌字体 */
         .enter-text {
             position: absolute;
             color: white;
             font-size: 1.8rem;
             font-weight: bold;
-            /* 增加文字阴影，确保在浅色背景图片上也能看清 */
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
             pointer-events: none;
             white-space: nowrap;
-            /* 调整文字在图片上的上下位置：50%是正中间，值越大越靠下 */
             top: 55%; 
         }
 
         .cat-entrance:hover {
             transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* 固定分布的Emoji样式 - 无动画、规律排版 */
+        .fixed-emoji {
+            position: absolute;
+            font-size: 28px; /* 统一大小，避免杂乱 */
+            pointer-events: none;
+            z-index: 5; /* 低于文字和按钮，高于雪花 */
+            /* 轻微发光效果，和文字呼应 */
+            text-shadow: 0 0 8px rgba(255, 182, 193, 0.6);
         }
     </style>
 </head>
@@ -90,6 +96,7 @@
     </div>
 
     <script>
+        // 雪花相关代码（保留原有功能）
         const canvas = document.getElementById('snowCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, snowflakes = [];
@@ -131,8 +138,39 @@
             }
         }
 
+        // 固定分布的Emoji - 规律排版，不杂乱
+        const emojis = ['✨', '💖', '🌈', '🍭', '🌸', '💫', '🍬', '🎀'];
+        // 定义8个固定位置（上下左右+四角），避免重叠和杂乱
+        const positions = [
+            {x: '10%', y: '10%'}, // 左上
+            {x: '90%', y: '10%'}, // 右上
+            {x: '10%', y: '90%'}, // 左下
+            {x: '90%', y: '90%'}, // 右下
+            {x: '50%', y: '15%'}, // 中上
+            {x: '50%', y: '85%'}, // 中下
+            {x: '25%', y: '50%'}, // 左中
+            {x: '75%', y: '50%'}  // 右中
+        ];
+
+        // 创建固定位置的Emoji
+        function createFixedEmojis() {
+            positions.forEach((pos, index) => {
+                const emoji = document.createElement('div');
+                emoji.className = 'fixed-emoji';
+                emoji.textContent = emojis[index % emojis.length];
+                // 用百分比定位，适配不同屏幕
+                emoji.style.left = pos.x;
+                emoji.style.top = pos.y;
+                document.body.appendChild(emoji);
+            });
+        }
+
+        // 窗口大小变化时重新初始化
         window.addEventListener('resize', init);
+        
+        // 初始化执行
         init();
+        createFixedEmojis();
         setInterval(draw, 30);
     </script>
 </body>
