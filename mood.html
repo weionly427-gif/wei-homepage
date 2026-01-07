@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>维维宝贝的心情空间 - 目录</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #1a1a1a; /* 深色背景，衬托卡片 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: white;
+        }
+
+        /* 磨砂玻璃容器 */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #FFB6C1;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+        }
+
+        .mood-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* 心情卡片基础样式 */
+        .mood-item {
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            color: white;
+            font-family: inherit;
+        }
+
+        .mood-item:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        /* 5种心情的具体颜色 */
+        .sunny { background-color: #FFD700; color: #554400; } /* 晴：金黄 */
+        .rainy { background-color: #4682B4; }              /* 雨：钢蓝 */
+        .cloudy { background-color: #A9A9A9; }             /* 阴：暗灰 */
+        .windy { background-color: #40E0D0; color: #004444; } /* 风：青绿 */
+        .snowy { background-color: #E0FFFF; color: #445555; } /* 雪：淡蓝 */
+
+        .back-home {
+            margin-top: 30px;
+            background: none;
+            border: 1px solid #FFB6C1;
+            color: #FFB6C1;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            background: #FFB6C1;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-container">
+        <h1>今天的心情是...</h1>
+        <div class="mood-list">
+            <button class="mood-item sunny" onclick="alert('今天也要像太阳一样灿烂呀！☀️')">☀️ 晴 · Sunny</button>
+            <button class="mood-item rainy" onclick="alert('听，是雨滴在跳舞的声音 🌧️')">🌧️ 雨 · Rainy</button>
+            <button class="mood-item cloudy" onclick="alert('云朵厚厚的，适合发呆哦 ☁️')">☁️ 阴 · Cloudy</button>
+            <button class="mood-item windy" onclick="alert('让风吹走所有的烦恼吧 🌬️')">🌬️ 风 · Windy</button>
+            <button class="mood-item snowy" onclick="alert('最浪漫的事就是和你一起看雪 ❄️')">❄️ 雪 · Snowy</button>
+        </div>
+        <button class="back-home" onclick="window.location.href='index.html'">🐾 返回首页</button>
+    </div>
+
+</body>
+</html>
